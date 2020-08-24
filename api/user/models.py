@@ -5,11 +5,10 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     name = models.CharField(max_length=50, default='Anonymous')
     email = models.EmailField(max_length=254, unique=True)
+    username = None
 
-    #username = None
-
-    USERNAME_FEILD = 'email'
-    REQUIRED_FIEDLS = []
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
 
     phone = models.CharField(max_length=15, blank=True, null=True)
     gender = models.CharField(max_length=10, blank=True, null=True)
