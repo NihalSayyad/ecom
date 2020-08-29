@@ -12,7 +12,7 @@ import re
 # Create your views here.
 
 def generate_session_token(length=10):
-    return ''.join(random.SystemRandom().choice([chr[i] for i in range(97,123)] + str(i) for i in range(10)) for _ in range(length))
+    return ''.join(random.SystemRandom().choice([chr(i) for i in range(97, 123)] + [str(i) for i in range(10)]) for _ in range(length))
 
 @csrf_exempt
 def signin(request):
@@ -23,7 +23,7 @@ def signin(request):
     password = request.POST['password']
 
 # Add any validation methods as you want here
-    if not re.match("^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$",username):
+    if not re.match("^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$", username):
         return JsonResponse({'error':'Enter a Valid email'})
 
     if len(password)<3:
